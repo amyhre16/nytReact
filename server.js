@@ -20,6 +20,15 @@ mongoose.connect(process.env.MONGOOSE_URI || "mongodb://localhost/nytreact");
 
 var db = mongoose.connection;
 
+db.on('error', function(err) {
+    console.log("Mongoose Error:", err);
+    throw err;
+});
+
+db.once("open", function() {
+    console.log("Mongoose connection successful");
+});
+
 app.listen(process.env.PORT || 8080, function() {
     console.log("Server is listneing on port", process.env.PORT || 8080);
 });
