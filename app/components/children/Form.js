@@ -12,24 +12,31 @@ var Form = React.createClass({
     handleSubmit: function (event) {
         event.preventDefault();
 
-        this.props.setTerm(this.state.term);
-        this.setState({ term });
+        this.props.setTerm(this.state.topic);
+        // this.setState({ term });
     },
     render: function () {
-        <div className="panel panel-default">
-            <div className="panel panel-header">
-                <h3><strong>Search</strong></h3>
+        return (
+            <div className="panel panel-default">
+                <div className="panel panel-header">
+                    <h3><strong>Search</strong></h3>
+                </div>
+                <div className="panel panel-body">
+                    <label>Topic</label>
+                    <input type="text" className="form-control text-center" id="topic" value={this.state.topic} onChange={this.handleChange} required />
+
+                    <label>Start Year</label>
+                    <input type="text" className="form-control text-center" id="startYear" value={this.state.startYear} />
+
+                    <label>End Year</label>
+                    <input type="text" className="form-control text-center" id="endYear" value={this.state.endYear} />
+
+                    <br />
+                    <button type="submit" className="btn btn-primary" onClick={this.props.handleSubmit}>Search</button>
+                </div>
             </div>
-            <div className="panel panel-body">
-                <label for="topic">Topic</label>
-                <input type="text" className="form-control text-center" name="topic" id="topic" value={this.state.topic} onChange={this.handleChange} required />
-                <label for="startYear">Start Year</label>
-                <input type="text" className="form-control text-center" name="startYear" id="startYear" value={this.state.startYear} />
-                <label for="endYear">End Year</label>
-                <input type="text" className="form-control text-center" name="endYear" id="endYear" value={this.state.endYear} />
-            </div>
-            <button type="submit" className="btn btn-primary">Search</button>
-        </div>
+        )
     }
 });
 
+module.exports = Form;

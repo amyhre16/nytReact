@@ -13,14 +13,14 @@ var hashHistory = router.hashHistory;
 var IndexRoute = router.IndexRoute;
 
 var Main = require('../components/Main');
-var Saved = require('../components/Saved');
-var Search = require('../components/Search');
+var Saved = require('../components/children/Saved');
+var Result = require('../components/children/Result');
 
 module.exports = (
     <Router history={hashHistory}>
         <Route path="/" component={Main}>
             <Route path="saved" component={Saved} />
-            <Route path="search" component={Search} />
+            <Route path="result" component={Result} />
 
             <IndexRoute component={Saved} />
         </Route>

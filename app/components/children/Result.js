@@ -1,3 +1,7 @@
+'use strict';
+
+var React = require('react');
+
 <div className="panel panel-default">
     <div className="panel panel-header">
         <h3><strong>Results</strong></h3>

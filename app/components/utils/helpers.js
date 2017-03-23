@@ -2,24 +2,32 @@
 
 var axios = require('axios');
 
-var apiKey = "";
+var apiKey = "2ab3ce7e5fd14511b80ed99e05fd242e";
 
 var helper = {
-    getSavedArticles: function () {
-        var queryURL = "";
-        
-        return axios.get(queryURL).then(function(response) {
-            if (response.data.results[0]) {
-                return response.data.results[0].formatted;
+    runQuery: function () {
+        var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + apiKey + "&q='Texas Longhorns'";
+
+        return axios.get(queryURL).then(function (response) {
+            console.log(response.data.response.docs[0].web_url);
+            console.log(response.data.response.docs[0].headline.main);
+            if (response.data.response.docs[0]) {
+                return response.data.response.docs[0];
             }
 
             return "";
         });
     },
-
-    runQuery: function(article) {
-        console.log(article);
-        return axios.post('/saveArticle', {articleID: article.id});
+    getSavedArticles: function () {
+        // console.log(article);
+        return axios.get('/getSavedArticles');
+        // return {data: "Hello world"}
+    },
+    saveArticle: function (newArticle) {
+        return axios.post('/saveArticle', newArticle);
+    },
+    deleteArticle: function (id) {
+        return axios.post('/deleteArticle', { id: id });
     }
 };
 
