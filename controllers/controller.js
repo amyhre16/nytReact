@@ -4,6 +4,10 @@ var Article = require('../models/Article');
 
 
 module.exports = function (app) {
+    app.get("/favicon.ico", function(req, res){
+		res.send(204);
+	});
+
     app.get('/getSavedArticles', function (req, res) {
         Article.find({}, function (err, doc) {
             res.send(doc);

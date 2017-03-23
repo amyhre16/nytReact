@@ -10,15 +10,15 @@ var helpers = require('./utils/helpers');
 
 var Main = React.createClass({
     getInitialState: function () {
-        return { searchTerm: {}, results: "", savedArticles: "" }
+        return { searchTerm: {}, results: {}, savedArticles: {} }
     },
     componentDidMount: function () {
         helpers.getSavedArticles().then(function (response) {
             console.log(response);
-            this.setState({ savedArticles: response.data });
+            // this.setState({ savedArticles: response.data });
         }.bind(this));
     },
-    handleSubmit: function () {
+    componentDidUpdate: function () {
         helpers.runQuery(this.state.searchTerm).then(function (data) {
             if (data !== this.state.results) {
                 console.log("Results", data);
@@ -27,8 +27,10 @@ var Main = React.createClass({
         }.bind(this));
     },
     setTerm: function (term) {
-        this.setState({ searchTerm: term });
+        this.setState(term);
+        console.log("From Main.setTerm");
         console.log(term);
+        console.log(this.state);
     },
     render: function () {
         return (

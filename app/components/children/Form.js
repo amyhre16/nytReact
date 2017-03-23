@@ -7,12 +7,16 @@ var Form = React.createClass({
         return { topic: "", startYear: "", endYear: "" };
     },
     handleChange: function (event) {
-        this.setState({ term: event.target.value });
+        var newState = {};
+        newState[event.target.id] = event.target.value;
+        this.setState(newState);
+        console.log(this.state);
+        // this.setState({ term: event.target.value });
     },
     handleSubmit: function (event) {
         event.preventDefault();
 
-        this.props.setTerm(this.state.topic);
+        this.props.setTerm(this.state);
         // this.setState({ term });
     },
     render: function () {
@@ -26,13 +30,13 @@ var Form = React.createClass({
                     <input type="text" className="form-control text-center" id="topic" value={this.state.topic} onChange={this.handleChange} required />
 
                     <label>Start Year</label>
-                    <input type="text" className="form-control text-center" id="startYear" value={this.state.startYear} />
+                    <input type="text" className="form-control text-center" id="startYear" value={this.state.startYear} onChange={this.handleChange} />
 
                     <label>End Year</label>
-                    <input type="text" className="form-control text-center" id="endYear" value={this.state.endYear} />
+                    <input type="text" className="form-control text-center" id="endYear" value={this.state.endYear} onChange={this.handleChange} />
 
                     <br />
-                    <button type="submit" className="btn btn-primary" onClick={this.props.handleSubmit}>Search</button>
+                    <button type="submit" className="btn btn-primary" onClick={this.handleSubmit}>Search</button>
                 </div>
             </div>
         )
